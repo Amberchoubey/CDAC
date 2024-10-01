@@ -1,0 +1,19 @@
+public class WideningConversionDemo {
+    public static void main(String[] args) {
+        int intValue = 42;
+
+        double doubleValue = intValue;
+
+        float floatValue = intValue;
+
+        String stringValue = Integer.toString(intValue); 
+
+        boolean booleanValue = intValue > 0;
+
+        System.out.println("Integer value: " + intValue);
+        System.out.println("Widened double value: " + doubleValue);
+        System.out.println("Widened float value: " + floatValue);
+        System.out.println("String representation: " + stringValue);
+        System.out.println("Boolean value (is intValue > 0?): " + booleanValue);
+    }
+}

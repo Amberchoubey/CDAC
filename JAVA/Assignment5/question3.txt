@@ -1,0 +1,140 @@
+
+public class Employee {
+    private static int totalEmployees = 0;
+    private static double totalSalaryExpense = 0.0;
+
+    private int id;
+    private String name;
+    private double salary;
+
+    public Employee(int id, String name, double salary) {
+        this.id = id;
+        this.name = name;
+        this.salary = salary;
+
+        totalEmployees++;
+        totalSalaryExpense += salary;
+    }
+
+    public static int getTotalEmployees() {
+        return totalEmployees;
+    }
+
+    public static void applyRaise(double percentage, List<Employee> employees) {
+        for (Employee employee : employees) {
+            double raiseAmount = employee.salary * (percentage / 100);
+            employee.salary += raiseAmount;
+        }
+        calculateTotalSalaryExpense(employees);
+    }
+
+    public static double calculateTotalSalaryExpense(List<Employee> employees) {
+        totalSalaryExpense = 0.0; 
+        for (Employee employee : employees) {
+            totalSalaryExpense += employee.salary;
+        }
+        return totalSalaryExpense;
+    }
+
+    public void updateSalary(double newSalary) {
+        totalSalaryExpense -= this.salary; 
+        this.salary = newSalary;
+        totalSalaryExpense += newSalary;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee ID: " + id + ", Name: " + name + ", Salary: " + salary;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        List<Employee> employees = new ArrayList<>();
+
+        while (true) {
+            System.out.println("\nMenu:");
+            System.out.println("1. Add Employee");
+            System.out.println("2. Get Total Employees");
+            System.out.println("3. Apply Raise");
+            System.out.println("4. Calculate Total Salary Expense");
+            System.out.println("5. Update Salary of an Employee");
+            System.out.println("6. Display All Employees");
+            System.out.println("7. Exit");
+            System.out.print("Choose an option: ");
+
+            int choice = scanner.nextInt();
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter Employee ID: ");
+                    int id = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print("Enter Employee Name: ");
+                    String name = scanner.nextLine();
+                    System.out.print("Enter Employee Salary: ");
+                    double salary = scanner.nextDouble();
+                    employees.add(new Employee(id, name, salary));
+                    System.out.println("Employee added.");
+                    break;
+
+                case 2:
+                    System.out.println("Total Employees: " + Employee.getTotalEmployees());
+                    break;
+
+                case 3:
+                    System.out.print("Enter percentage raise: ");
+                    double percentage = scanner.nextDouble();
+                    Employee.applyRaise(percentage, employees);
+                    System.out.println("Raise applied to all employees.");
+                    break;
+
+                case 4:
+                    double totalExpense = Employee.calculateTotalSalaryExpense(employees);
+                    System.out.println("Total Salary Expense: " + totalExpense);
+                    break;
+
+                case 5:
+                    System.out.print("Enter Employee ID to update salary: ");
+                    int updateId = scanner.nextInt();
+                    System.out.print("Enter new salary: ");
+                    double newSalary = scanner.nextDouble();
+                    for (Employee employee : employees) {
+                        if (employee.getId() == updateId) {
+                            employee.updateSalary(newSalary);
+                            System.out.println("Salary updated.");
+                            break;
+                        }
+                    }
+                    break;
+
+                case 6:
+                    System.out.println("Employees:");
+                    for (Employee employee : employees) {
+                        System.out.println(employee);
+                    }
+                    break;
+
+                case 7:
+                    System.out.println("Exiting.");
+                    scanner.close();
+                    return;
+
+                default:
+                    System.out.println("Invalid option. Please try again.");
+            }
+        }
+    }
+}
+
+

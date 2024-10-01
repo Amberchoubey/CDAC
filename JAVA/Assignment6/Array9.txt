@@ -1,0 +1,120 @@
+
+public class AirplaneSeating {
+
+    private char[][] seats; 
+    private int rows;
+    private int columns;
+
+    public AirplaneSeating(int rows, int columns) {
+        this.rows = rows;
+        this.columns = columns;
+        seats = new char[rows][columns];
+        initializeSeats();
+    }
+
+    private void initializeSeats() {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                seats[i][j] = 'A'; 
+            }
+        }
+    }
+
+    public boolean bookSeat(int row, int column) {
+        if (isSeatAvailable(row, column)) {
+            seats[row][column] = 'O'; 
+            return true;
+        }
+        return false;
+    }
+
+    public boolean cancelBooking(int row, int column) {
+        if (!isSeatAvailable(row, column)) {
+            seats[row][column] = 'A'; 
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isSeatAvailable(int row, int column) {
+        return seats[row][column] == 'A';
+    }
+
+    public void displaySeatingChart() {
+        System.out.println("Current Seating Chart:");
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                System.out.print(seats[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter number of rows: ");
+        int rows = scanner.nextInt();
+        System.out.print("Enter number of columns: ");
+        int columns = scanner.nextInt();
+
+        AirplaneSeating airplaneSeating = new AirplaneSeating(rows, columns);
+
+        while (true) {
+            System.out.println("1. Book a seat");
+            System.out.println("2. Cancel a booking");
+            System.out.println("3. Check seat availability");
+            System.out.println("4. Display seating chart");
+            System.out.println("5. Exit");
+            System.out.print("Choose an option: ");
+
+            int choice = scanner.nextInt();
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter row and column to book ");
+                    int bookRow = scanner.nextInt();
+                    int bookColumn = scanner.nextInt();
+                    if (airplaneSeating.bookSeat(bookRow, bookColumn)) {
+                        System.out.println("Seat booked successfully.");
+                    } else {
+                        System.out.println("Seat is not available.");
+                    }
+                    break;
+
+                case 2:
+                    System.out.print("Enter row and column to cancel (0-based index): ");
+                    int cancelRow = scanner.nextInt();
+                    int cancelColumn = scanner.nextInt();
+                    if (airplaneSeating.cancelBooking(cancelRow, cancelColumn)) {
+                        System.out.println("Booking canceled successfully.");
+                    } else {
+                        System.out.println("Seat was not booked.");
+                    }
+                    break;
+
+                case 3:
+                    System.out.print("Enter row and column to check availability (0-based index): ");
+                    int checkRow = scanner.nextInt();
+                    int checkColumn = scanner.nextInt();
+                    if (airplaneSeating.isSeatAvailable(checkRow, checkColumn)) {
+                        System.out.println("Seat is available.");
+                    } else {
+                        System.out.println("Seat is occupied.");
+                    }
+                    break;
+
+                case 4:
+                    airplaneSeating.displaySeatingChart();
+                    break;
+
+                case 5:
+                    System.out.println("Exiting.");
+                    scanner.close();
+                    return;
+
+                default:
+                    System.out.println("Invalid option. Please try again.");
+            }
+        }
+    }
+}

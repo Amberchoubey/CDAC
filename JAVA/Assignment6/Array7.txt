@@ -1,0 +1,35 @@
+package Assignment5and6;
+
+import java.util.Scanner;
+
+public class Array7 {
+    public int [] arr;
+    public Array7(int size){
+        arr=new int[size];
+
+    }
+    public void acceptrecord(Scanner sc){
+        System.out.println("enter numbers of array");
+        for(int i=0;i< arr.length;i++){
+            arr[i]=sc.nextInt();
+            //return arr[i];
+        }
+    }
+    public void printrecord(){
+        System.out.print("array is= ");
+        for(int i=0;i< arr.length;i++){
+            System.out.print(arr[i]+" ");
+        }
+    }
+    public static void main(String []args) {
+        System.out.println("enter size of array");
+        Scanner sc = new Scanner(System.in);
+        int size=sc.nextInt();
+        Array7 ar =new Array7(size);
+        ar.acceptrecord(sc);
+        ar.printrecord();
+
+
+
+    }
+}

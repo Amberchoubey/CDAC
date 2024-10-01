@@ -1,0 +1,26 @@
+
+public class RemoveDuplicates {
+
+    public static int[] removeDuplicates(int[] array) {
+        HashSet<Integer> uniqueElements = new HashSet<>();
+        for (int num : array) {
+            uniqueElements.add(num);
+        }
+
+        int[] result = new int[uniqueElements.size()];
+        int index = 0;
+        for (int num : uniqueElements) {
+            result[index++] = num;
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[] array = {1, 2, 3, 2, 4, 1, 5, 6, 4, 7};
+        System.out.println("Original Array: " + Arrays.toString(array));
+
+        int[] uniqueArray = removeDuplicates(array);
+        System.out.println("Array after removing duplicates: " + Arrays.toString(uniqueArray));
+    }
+}

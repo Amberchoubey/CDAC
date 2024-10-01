@@ -1,0 +1,43 @@
+
+public class LeapYearChecker {
+
+    public static boolean isLeapYearIfElse(int year) {
+        if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean isLeapYearSwitch(int year) {
+        int leapYearCondition;
+
+        if (year % 4 == 0) {
+            if (year % 100 == 0) {
+                if (year % 400 == 0) {
+                    leapYearCondition = 1;
+                } else {
+                    leapYearCondition = 0;
+                }
+            } else {
+                leapYearCondition = 1;
+            }
+        } else {
+            leapYearCondition = 0;
+        }
+
+        switch (leapYearCondition) {
+            case 1:
+                return true;
+            case 0:
+            default:
+                return false;
+        }
+    }
+
+}
+
+
+
+
+

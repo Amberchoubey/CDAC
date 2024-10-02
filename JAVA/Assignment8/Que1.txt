@@ -1,0 +1,80 @@
+class BankAccount {
+    private String accountNumber; 
+    private double balance; 
+
+    public BankAccount(String accountNumber, double initialBalance) {
+        this.accountNumber = accountNumber;
+        this.balance = initialBalance;
+    }
+
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.printf("Deposited: %.2f. New balance: %.2f.%n", amount, balance);
+        } else {
+            System.out.println("Deposit amount must be positive.");
+        }
+    }
+
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            System.out.printf("Withdrawn: %.2f. New balance: %.2f.%n", amount, balance);
+        } else {
+            System.out.println("Invalid withdrawal amount.");
+        }
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public String accountDetails() {
+        return String.format("Account Number: %s, Balance: %.2f", accountNumber, balance);
+    }
+}
+
+class SavingsAccount extends BankAccount {
+    private double withdrawalLimit; 
+
+    public SavingsAccount(String accountNumber, double initialBalance, double withdrawalLimit) {
+        super(accountNumber, initialBalance);
+        this.withdrawalLimit = withdrawalLimit;
+    }
+
+    @Override
+    public void withdraw(double amount) {
+        if (amount > withdrawalLimit) {
+            System.out.printf("Withdrawal limit exceeded! You can only withdraw up to %.2f.%n", withdrawalLimit);
+        } else {
+            super.withdraw(amount);
+        }
+    }
+
+    @Override
+    public String accountDetails() {
+        return super.accountDetails() + String.format(", Withdrawal Limit: %.2f", withdrawalLimit);
+    }
+}
+
+// Demonstration
+public class Main {
+    public static void main(String[] args) {
+     
+        SavingsAccount savingsAccount = new SavingsAccount("12345678", 5000, 1500);
+
+        System.out.println(savingsAccount.accountDetails());
+
+        savingsAccount.deposit(2000);
+
+        savingsAccount.withdraw(2000);
+
+        savingsAccount.withdraw(1000);
+
+        System.out.println(savingsAccount.accountDetails());
+    }
+}

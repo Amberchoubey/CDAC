@@ -1,0 +1,45 @@
+class Vehicle {
+    private String make; 
+    private int year;
+
+    public Vehicle(String make, int year) {
+        this.make = make;
+        this.year = year;
+    }
+
+    public String getMake() {
+        return make;
+    }
+
+    public int getYear() {
+        return year;
+    }
+}
+
+class Car extends Vehicle {
+    private String model; 
+
+    public Car(String make, int year, String model) {
+        super(make, year); 
+        this.model = model;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public String carDetails() {
+        return String.format("Make: %s, Year: %d, Model: %s", getMake(), getYear(), model);
+    }
+}
+
+// Demonstration
+public class Main {
+    public static void main(String[] args) {
+      
+        Car myCar = new Car("Toyota", 2020, "Corolla");
+
+        System.out.println(myCar.carDetails());
+    }
+}
+

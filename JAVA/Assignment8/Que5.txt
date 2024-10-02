@@ -1,0 +1,48 @@
+class Vehicle {
+ 
+    public void startEngine() {
+        System.out.println("Starting the engine of the vehicle.");
+    }
+
+    public void stopEngine() {
+        System.out.println("Stopping the engine of the vehicle.");
+    }
+}
+
+class Car extends Vehicle {
+    @Override
+    public void startEngine() {
+        System.out.println("Starting the engine of the car with a key.");
+    }
+
+    @Override
+    public void stopEngine() {
+        System.out.println("Stopping the engine of the car with the ignition switch.");
+    }
+}
+
+class Motorcycle extends Vehicle {
+    @Override
+    public void startEngine() {
+        System.out.println("Starting the engine of the motorcycle with a button.");
+    }
+
+    @Override
+    public void stopEngine() {
+        System.out.println("Stopping the engine of the motorcycle by turning off the switch.");
+    }
+}
+
+public class VehicleDemo {
+    public static void main(String[] args) {
+      
+        Vehicle myCar = new Car();
+        Vehicle myMotorcycle = new Motorcycle();
+
+        myCar.startEngine();
+        myCar.stopEngine();
+
+        myMotorcycle.startEngine();
+        myMotorcycle.stopEngine();
+    }
+}
